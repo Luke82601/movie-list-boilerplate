@@ -21,6 +21,10 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
   }
 
+  toggleWatch() {
+
+  }
+
   addMovie(movie) {
     let list = this.state.movies.slice();
     list.push(movie)
