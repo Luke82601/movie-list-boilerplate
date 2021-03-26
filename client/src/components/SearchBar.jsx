@@ -9,7 +9,7 @@ class SearchBar extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({title: event.target.value})
+    this.setState({ title: event.target.value })
   }
 
   handleSubmit(event) {
@@ -20,18 +20,15 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        {/* {this.props.movies.map((movie, i) => ( */}
-          <form onSubmit={this.handleSubmit}>
-            <label> Search
-              <input
-                name="title"
-                value={this.state.title}
-                onChange={this.handleChange}
-              />
-            </label>
-            <button id="add">Search</button>
-          </form>
-        {/* ))} */}
+        <form onSubmit={this.handleSubmit}>
+          <label> Search
+            <input
+              name="title"
+              value={this.state.title}
+              onChange={this.handleChange}/>
+          </label>
+          <button id="add">Search</button>
+        </form>
       </div>
     )
   }

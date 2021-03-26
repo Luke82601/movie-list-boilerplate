@@ -3,26 +3,23 @@ import MovieList from './MovieList.jsx';
 import SearchBar from './SearchBar.jsx';
 import AddMovie from './AddMovie.jsx';
 
-var movies = [
-  // {title: 'Mean Girls'},
-  // {title: 'Hackers'},
-  // {title: 'The Grey'},
-  // {title: 'Sunshine'},
-  // {title: 'Ex Machina'},
-];
-
-var searchItem = '';
+const movies = [];
+const searchItem = '';
+const watchedList = [];
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {movies, searchItem}
+    this.state = { movies, searchItem, watchedList }
     this.showSearch = this.showSearch.bind(this);
     this.addMovie = this.addMovie.bind(this);
+    this.toggleWatch = this.toggleWatch.bind(this)
   }
 
-  toggleWatch() {
-
+  toggleWatch(movie) {
+    let watched = this.state.watchedList.slice();
+    watched.push(movie);
+    this.setState({ watchedList: watched }, () => {console.log(this.state)});
   }
 
   addMovie(movie) {
@@ -36,8 +33,7 @@ class App extends React.Component {
       if (movie.title.includes(letter)) {
         let results = []
         results.push(movie.title);
-        // console.log(result)
-        this.setState({searchItem: results})
+        this.setState({ searchItem: results })
       }
     })
   }
@@ -46,13 +42,16 @@ class App extends React.Component {
     return(
       <div>
         <h1>Movie List</h1>
-          <AddMovie addMovie={this.addMovie}movies={this.state.movies}/>
-          <SearchBar
-            movies={this.state.movies}
-            showSearch={this.showSearch}
-          />
-          <MovieList
-            searchItem={this.state.searchItem} movies={this.state.movies}/>
+        <AddMovie
+          addMovie={this.addMovie}
+          movies={this.state.movies}/>
+        <SearchBar
+          movies={this.state.movies}
+          showSearch={this.showSearch}/>
+        <MovieList
+          searchItem={this.state.searchItem}
+          movies={this.state.movies}
+          toggleWatch={this.toggleWatch}/>
       </div>
     )
   }
